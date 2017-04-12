@@ -1,0 +1,14 @@
+version: '2.1'
+services:
+    keepass:
+        build:
+            context: ./keepass
+            dockerfile: Dockerfile
+        image: localrepo/keepasscli:v1.0.4
+        volumes:
+            - - /directory/path/to/db.kdb/file:/data:/data
+        healthcheck:
+            test: ["CMD", "kpcli", "--help"]
+            interval: 4s
+            timeout: 6s
+            retries: 6
